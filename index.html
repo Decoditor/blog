@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <script
+      src="https://kit.fontawesome.com/c4079dda5e.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <nav>
+      <h2 class="name">Blog..</h2>
+
+      <form>
+        <input
+          id="searchForm"
+          type="text"
+          placeholder="what are you looking for"
+        />
+        <button type="button" id="searchBtn" onclick="search()">
+          <i class="fas search fa-search"></i>
+        </button>
+      </form>
+
+      <div class="login">
+        <a href="login.html" id="login"> <button class="btn">Login</button> </a>
+        <a href="dashboard.html" class="user">
+          <button id="user" class="btn"></button>
+        </a>
+        <img onclick="showNav()" src="/images/menu.png" id="menuIcon" alt="" />
+        <div id="navContent">
+          <div class="navBg" onclick="hideNav()"></div>
+          <div class="navbar">
+            <h2 id="name">User</h2>
+            <ul>
+              <a href="dashboard.html"><li>Dashboard</li></a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </body>
+  <script>
+    const user = localStorage.getItem("isLoggedIn");
+    const logBtn = document.getElementById("login");
+    const menuIcon = document.getElementById("menuIcon");
+    const userName = document.getElementById("user");
+    const name = document.getElementById("name");
+    if (user) {
+      const currentUser = user.split(" ");
+      logBtn.style.display = "none";
+      userName.style.display = "block";
+      userName.innerText = currentUser[0];
+      name.innerText = currentUser[0];
+    } else {
+      menuIcon.style.display = "none";
+    }
+
+    function search() {
+      const searchForm = document.getElementById("searchForm").value.trim();
+      // const searchBtn = document.getElementById('searchBtn');
+      if (searchForm) {
+        location.href = "search.html?query=" + encodeURIComponent(searchForm);
+      } else {
+        alert("Input post to search");
+      }
+    }
+
+    function hideNav() {
+      const closenav = document.getElementById("navContent");
+      closenav.style.display = "none";
+    }
+    function showNav() {
+      const closenav = document.getElementById("navContent");
+      closenav.style.display = "block";
+    }
+  </script>
+</html>

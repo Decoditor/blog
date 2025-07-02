@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="module" src="dashboard.js"></script>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+        padding: 0;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        padding: 0 10rem;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0px;
+        margin-bottom: 2rem;
+      }
+      nav a {
+        text-decoration: none;
+      }
+      nav button {
+        padding: 8px 15px;
+        cursor: pointer;
+        background-color: transparent;
+      }
+      .content {
+        padding: 0px 2rem;
+        display: grid;
+        gap: 5rem;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .top button {
+        padding: 8px 14px;
+        background: transparent;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .postContainer {
+        display: grid;
+        gap: 2rem;
+      }
+      #posts {
+        display: grid;
+        gap: 1rem;
+      }
+      .post {
+        background: rgb(223, 219, 219);
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .texts {
+        display: grid;
+        gap: 10px;
+      }
+      .post h4 {
+        font-size: 18px;
+      }
+      .post p {
+        font-size: 13px;
+      }
+      .icons {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      .icons img {
+        width: 30px;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      .icons img:hover {
+        background-color: white;
+      }
+      @media (max-width: 900px) {
+        body {
+          padding: 0 1rem;
+        }
+        .icons {
+          gap: 6px;
+        }
+        .content {
+          padding: 0px 1rem;
+        }
+        .top h1 {
+          font-size: 22px;
+        }
+        .top {
+          align-items: center;
+        }
+        .icons img {
+          width: 25px;
+        }
+        .post h4 {
+          font-size: 15px;
+        }
+        .post p {
+          font-size: 12px;
+        }
+        .postContainer h2 {
+          font-size: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/"> <h1 class="name">Blog..</h1></a>
+      <button type="submit" onclick="logout()">Logout</button>
+    </nav>
+
+    <div class="content">
+      <div class="top">
+        <h1>Welcome, <span id="user">User</span></h1>
+        <a href="addPost.html"><button>Add Post</button></a>
+      </div>
+
+      <div class="postContainer">
+        <h2>All Posts</h2>
+        <div id="posts"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      location.reload();
+    }
+  </script>
+</html>
