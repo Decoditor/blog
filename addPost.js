@@ -43,7 +43,7 @@ function addPost() {
 
     let date = `${month}, ${mdate}, ${year}`;
     let newPost = {
-      id: JSON.stringify(new Date()),
+      id: allPost.length + 2,
       title: title.value,
       content: content.value,
       date: date,
