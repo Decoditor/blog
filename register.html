@@ -63,7 +63,7 @@
       if (!localStorage.getItem(email)) {
         alert("Account Created");
         localStorage.setItem(email, JSON.stringify({ name, email, password }));
-        location.href = "http://localhost:5500/login.html";
+        location.href = "login.html";
       } else {
         alert("email has been used exist");
         return;

@@ -43,7 +43,14 @@
       </div>
     </nav>
   </body>
-  <script>
+  <script type="module">
+    import { posts } from "/dummy.js";
+
+    if (!localStorage.getItem("hasVisited")) {
+      localStorage.setItem("posts", JSON.stringify(posts));
+
+      localStorage.setItem("hasVisited", "true");
+    }
     const user = localStorage.getItem("isLoggedIn");
     const logBtn = document.getElementById("login");
     const menuIcon = document.getElementById("menuIcon");
@@ -68,14 +75,17 @@
         alert("Input post to search");
       }
     }
+    window.search = search;
 
     function hideNav() {
       const closenav = document.getElementById("navContent");
       closenav.style.display = "none";
     }
+    window.hideNav = hideNav;
     function showNav() {
       const closenav = document.getElementById("navContent");
       closenav.style.display = "block";
     }
+    window.showNav = showNav;
   </script>
 </html>
