@@ -3,10 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        width: 100vw;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #postContainer {
+        width: 60%;
+        margin: auto;
+        padding: 3rem 0px;
+      }
+      #postImg {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+      }
+      #postTitle {
+        margin-bottom: 1rem;
+        font-size: 38px;
+      }
+      .imgContainer {
+        height: 36rem;
+        position: relative;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        border-radius: 10px;
+      }
+      .blur {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #00000037;
+        right: 0;
+        top: 0;
+        border-radius: 10px;
+      }
+      #postContent {
+        line-height: 2rem;
+      }
+    </style>
   </head>
   <body>
-    <div id="container"></div>
+    <div id="postContainer">
+      <h1 id="postTitle"></h1>
+      <p id="postDate"></p>
+      <div class="imgContainer">
+        <div class="blur"></div>
+        <img id="postImg" alt="" />
+      </div>
+      <p id="postContent"></p>
+    </div>
   </body>
-  <script type="module" src="post.js"></script>
+  <script type="module">
+    // const postContainer = document.getElementById("container");
+    const title = document.getElementById("postTitle");
+    const img = document.getElementById("postImg");
+    const date = document.getElementById("postDate");
+    const content = document.getElementById("postContent");
+
+    const posts = JSON.parse(localStorage.getItem("posts"));
+    let param = new URLSearchParams(window.location.search);
+    let postId = parseInt(param.get("id"));
+    let post = posts.find((p) => p.id === postId);
+
+    if (post) {
+      title.innerText = post.title;
+      content.innerText = post.content;
+      date.innerText = "Date: " + post.date;
+      img.src = post.image;
+    }
+  </script>
 </html>

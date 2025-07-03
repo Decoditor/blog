@@ -17,8 +17,13 @@ newPosts.forEach((post) => {
   const p = document.createElement("p");
   p.innerHTML = post.date;
 
+  const content = document.createElement("p");
+  content.classList.add("content");
+  content.innerText = post.content.slice(0, 300) + "...";
+
   texts.appendChild(h4);
   texts.appendChild(p);
+  texts.appendChild(content);
   div.appendChild(texts);
 
   allPosts.appendChild(div);

@@ -12,21 +12,23 @@
   </head>
   <body>
     <nav>
-      <h2 class="name">Blog..</h2>
-
-      <form>
-        <input
-          id="searchForm"
-          type="text"
-          placeholder="what are you looking for"
-        />
-        <button type="button" id="searchBtn" onclick="search()">
-          <i class="fas search fa-search"></i>
-        </button>
-      </form>
-
+      <h2 class="name">Blog...</h2>
+      <ul class="lists">
+        <a href="/"><li class="list-items">Home</li></a>
+        <li class="list-items">Blog</li>
+        <a href="dashboard.html"><li class="list-items">Dashboard</li></a>
+        <li class="list-items">About</li>
+        <li class="list-items">Contact</li>
+      </ul>
       <div class="login">
-        <a href="login.html" id="login"> <button class="btn">Login</button> </a>
+        <div class="loginBtns">
+          <a href="login.html" id="login">
+            <button class="btn">Login</button>
+          </a>
+          <a href="register.html" id="register">
+            <button class="btn">Register</button>
+          </a>
+        </div>
         <a href="dashboard.html" class="user">
           <button id="user" class="btn"></button>
         </a>
@@ -42,7 +44,40 @@
         </div>
       </div>
     </nav>
+
+    <section class="hero">
+      <div class="texts">
+        <div class="logo">Blog...</div>
+        <h2 class="header">Stay Updated on the Latest Gist</h2>
+        <p>
+          Discover what's popping before anyone else, From Politics to Business
+          and much more, we make you stand out because Yorubas has a saying
+          <i>' info leye fin fo '</i>
+        </p>
+      </div>
+
+      <form class="search-form">
+        <input
+          id="searchForm"
+          type="text"
+          placeholder="what are you looking for"
+        />
+        <button type="button" id="searchBtn" onclick="search()">
+          Search..
+        </button>
+      </form>
+    </section>
+
+    <main>
+      <h2 class="headline">Interesting Stories</h2>
+
+      <div class="posts">
+        <div id="right"></div>
+        <div id="left"></div>
+      </div>
+    </main>
   </body>
+
   <script type="module">
     import { posts } from "/dummy.js";
 
@@ -53,17 +88,20 @@
     }
     const user = localStorage.getItem("isLoggedIn");
     const logBtn = document.getElementById("login");
+    const regBtn = document.getElementById("register");
     const menuIcon = document.getElementById("menuIcon");
     const userName = document.getElementById("user");
     const name = document.getElementById("name");
     if (user) {
-      const currentUser = user.split(" ");
+      const currentUser = user.split("");
       logBtn.style.display = "none";
+      regBtn.style.display = "none";
       userName.style.display = "block";
       userName.innerText = currentUser[0];
       name.innerText = currentUser[0];
     } else {
       menuIcon.style.display = "none";
+      userName.style.display = "none";
     }
 
     function search() {
@@ -87,5 +125,50 @@
       closenav.style.display = "block";
     }
     window.showNav = showNav;
+
+    // NAV LINKS MODIFICATION
+    let navLinks = document.querySelectorAll(".list-items");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.forEach((list) => list.classList.remove("active"));
+
+        link.classList.add("active");
+      });
+    });
+
+    // MAP POSTS TO HOME
+    let rightPosts = document.getElementById("right");
+    let leftPosts = document.getElementById("left");
+    let allPosts = JSON.parse(localStorage.getItem("posts"));
+    // localStorage.clear();
+    const filteredPosts = allPosts.filter((p) => p.image);
+    filteredPosts.forEach((p) => {
+      let link = document.createElement("a");
+      link.classList.add("post");
+      link.href = "post.html?id=" + p.id;
+      let texts = document.createElement("div");
+      texts.classList.add("postText");
+      let bgBlur = document.createElement("div");
+      bgBlur.classList.add("blurbg");
+      let category = document.createElement("p");
+      category.classList.add("category");
+      category.innerText = p.category;
+      let img = document.createElement("img");
+      img.src = p.image;
+      let title = document.createElement("p");
+      title.classList.add("title");
+      title.innerText = p.title;
+      let content = document.createElement("p");
+      content.className = "content";
+      content.innerText = p.content.slice(0, 150) + "...";
+
+      texts.appendChild(category);
+      texts.appendChild(title);
+      texts.appendChild(content);
+      link.appendChild(img);
+      link.appendChild(texts);
+      link.appendChild(bgBlur);
+      rightPosts.appendChild(link);
+    });
   </script>
 </html>

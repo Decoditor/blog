@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script type="module" src="dashboard.js"></script>
+    <script
+      src="https://kit.fontawesome.com/c4079dda5e.js"
+      crossorigin="anonymous"
+    ></script>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+      :root {
+        --primary-color: rgb(9, 61, 173);
+        --primary-bg: #1e63ca28;
+      }
       * {
         margin: 0;
         box-sizing: border-box;
@@ -14,7 +23,9 @@
       body {
         width: 100%;
         height: 100vh;
-        padding: 0 10rem;
+        /* padding: 0 10rem; */
+        display: flex;
+        font-family: "Roboto", sans-serif;
       }
       nav {
         display: flex;
@@ -33,7 +44,7 @@
       .content {
         padding: 0px 2rem;
         display: grid;
-        gap: 5rem;
+        /* gap: 5rem; */
       }
       .top {
         display: flex;
@@ -52,30 +63,44 @@
       }
       #posts {
         display: grid;
+        grid-template-columns: auto auto auto;
         gap: 1rem;
       }
       .post {
-        background: rgb(223, 219, 219);
+        background: white;
         padding: 1rem 2rem;
         border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        position: relative;
       }
       .texts {
         display: grid;
         gap: 10px;
       }
       .post h4 {
-        font-size: 18px;
+        font-size: 22px;
       }
       .post p {
         font-size: 13px;
       }
       .icons {
-        display: flex;
-        gap: 1rem;
+        display: none;
+        gap: 10px;
         align-items: center;
+        position: absolute;
+        background: #11111176;
+        padding: 10px;
+        border-radius: 0px 0px 10px 10px;
+        top: 0;
+        right: 0;
+        backdrop-filter: blur(10px);
+      }
+
+      .post:hover .icons {
+        display: block;
+        display: grid;
       }
       .icons img {
         width: 30px;
@@ -85,6 +110,36 @@
       }
       .icons img:hover {
         background-color: white;
+      }
+      header {
+        width: 20%;
+        background: white;
+        padding: 2rem;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      header ul a {
+        padding: 1rem;
+        border-bottom: 1px solid var(--primary-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+      }
+      header ul {
+        display: grid;
+        margin-top: 5rem;
+        gap: 1rem;
+      }
+      main {
+        width: 80%;
+        background: var(--primary-bg);
+        padding: 3rem 2rem;
+      }
+      .name {
+        color: var(--primary-color);
       }
       @media (max-width: 900px) {
         body {
@@ -118,22 +173,27 @@
     </style>
   </head>
   <body>
-    <nav>
+    <header>
       <a href="/"> <h1 class="name">Blog..</h1></a>
-      <button type="submit" onclick="logout()">Logout</button>
-    </nav>
-
-    <div class="content">
-      <div class="top">
+      <ul>
+        <a href="/"> <i class="fa-solid fa-home"></i> Home</a>
+        <a href="post.html">
+          <i class="fa-regular fa-square-plus"></i> Add Post</a
+        >
+        <a href="/" onclick="logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout</a
+        >
+      </ul>
+    </header>
+    <main>
+      <div class="content">
         <h1>Welcome, <span id="user">User</span></h1>
-        <a href="addPost.html"><button>Add Post</button></a>
+        <div class="postContainer">
+          <h2>All Posts</h2>
+          <div id="posts"></div>
+        </div>
       </div>
-
-      <div class="postContainer">
-        <h2>All Posts</h2>
-        <div id="posts"></div>
-      </div>
-    </div>
+    </main>
   </body>
   <script>
     function logout() {
