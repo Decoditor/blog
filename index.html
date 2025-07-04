@@ -3,172 +3,239 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css" />
-    <script
-      src="https://kit.fontawesome.com/c4079dda5e.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+      body {
+        font-family: "Geist", sans-serif;
+      }
+      .list {
+        font-weight: 600;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.343);
+      }
+      .article {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        text-align: center;
+        gap: 20px;
+        cursor: pointer;
+      }
+      .article h2 {
+        font-size: 1.41rem;
+        font-weight: 500;
+        padding: 0px 2rem;
+        line-height: 1.8rem;
+      }
+      @media (min-width: 800px) {
+        .article h2 {
+          font-size: 22px;
+          padding: 0px 0.8rem;
+        }
+        .article img {
+          height: 176px;
+        }
+      }
+      footer .over p {
+        font-size: 18px;
+      }
+      footer .over .clear {
+        font-weight: bold;
+        color: rgb(234, 230, 230);
+      }
+      footer .over .fade {
+        font-weight: lighter;
+      }
+    </style>
     <title>Document</title>
   </head>
   <body>
-    <nav>
-      <h2 class="name">Blog...</h2>
-      <ul class="lists">
-        <a href="/"><li class="list-items">Home</li></a>
-        <li class="list-items">Blog</li>
-        <a href="dashboard.html"><li class="list-items">Dashboard</li></a>
-        <li class="list-items">About</li>
-        <li class="list-items">Contact</li>
-      </ul>
-      <div class="login">
-        <div class="loginBtns">
-          <a href="login.html" id="login">
-            <button class="btn">Login</button>
-          </a>
-          <a href="register.html" id="register">
-            <button class="btn">Register Now</button>
-          </a>
+    <nav
+      class="flex w-full items-center justify-between relative border-b border-gray-400 px-6 md:px-6 py-6 lg:px-18 lg:py-12"
+    >
+      <a href="/">
+        <img
+          src="images/logo.png"
+          class="w-56 md:w-[346px] lg:w-[396px]"
+          alt=""
+      /></a>
+      <svg
+        onclick="showNav()"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon w-8 icon-tabler md:hidden block icons-tabler-outline icon-tabler-menu-2"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 6l16 0" />
+        <path d="M4 12l16 0" />
+        <path d="M4 18l16 0" />
+      </svg>
+
+      <div
+        id="sidebar"
+        class="w-full h-lvh transform -translate-x-full md:hidden block opacity-0 transition-all duration-1000 ease-in-out flex bg-[rgba(0,0,0,0.3)] fixed top-0 right-0"
+      >
+        <div onclick="hideNav()" class="w-[40%] h-full"></div>
+        <div class="bg-white h-full w-[60%] p-2">
+          <svg
+            onclick="hideNav()"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-x"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M18 6l-12 12" />
+            <path d="M6 6l12 12" />
+          </svg>
+          <ul class="mt-14 grid gap-8">
+            <li class="list">BLOG</li>
+            <li class="list">ABOUT</li>
+            <li class="list">LINKS</li>
+            <li class="list">PROJECTS</li>
+          </ul>
         </div>
-        <a href="dashboard.html" class="user">
-          <button id="user" class="btn"></button>
-        </a>
-        <img onclick="showNav()" src="/images/menu.png" id="menuIcon" alt="" />
-        <div id="navContent">
-          <div class="navBg" onclick="hideNav()"></div>
-          <div class="navbar">
-            <h2 id="name">User</h2>
-            <ul>
-              <a href="dashboard.html"><li>Dashboard</li></a>
-            </ul>
-          </div>
-        </div>
+      </div>
+
+      <div class="md:block hidden">
+        <ul class="flex lg:gap-8 gap-4">
+          <li class="lg:text-[20px] font-[500]">BLOG</li>
+          <li class="lg:text-[20px] font-[500]">ABOUT</li>
+          <li class="lg:text-[20px] font-[500]">LINKS</li>
+          <li class="lg:text-[20px] font-[500]">PROJECTS</li>
+        </ul>
       </div>
     </nav>
 
-    <section class="hero">
-      <div class="texts">
-        <div class="logo">Blog...</div>
-        <h2 class="header">Stay Updated on the Latest Gist</h2>
-        <p>
-          Discover what's popping before anyone else, From Politics to Business
-          and much more, we make you stand out because Yorubas has a saying
-          <i>' info leye fin fo '</i>
-        </p>
-      </div>
-
-      <form class="search-form">
-        <input
-          id="searchForm"
-          type="text"
-          placeholder="what are you looking for"
-        />
-        <button type="button" id="searchBtn" onclick="search()">
-          Search..
-        </button>
-      </form>
-    </section>
-
-    <main>
-      <h2 class="headline">Interesting Stories</h2>
-
-      <div class="posts">
-        <div id="right"></div>
-        <div id="left"></div>
-      </div>
+    <main class="mt-14 grid gap-8 pb-14">
+      <img src="images/frontImg.png" class="lg:w-[854px] mx-auto" alt="" />
+      <h1
+        class="font-bold text-[36px] text-center px-6 md:px-0 md:w-[80%] lg:w-[55%] mx-auto lg:text-[54px] lg:leading-tight"
+      >
+        A few words about this blog platform, Ghost, and how this site was made
+      </h1>
+      <p
+        class="px-4 md:px-0 text-center text-[21px] md:w-[75%] lg:w-[39%] mx-auto lg:text-[20px] tracking-wider font-light leading-relaxed"
+      >
+        Why Ghost (& Figma) instead of Medium, WordPress or other options?
+      </p>
     </main>
+
+    <article
+      class="mx-5 grid gap-8 mb-16 border-t-2 pt-14 md:w-[60%] lg:w-[45%] md:mx-auto"
+    >
+      <h1 class="text-[44px] font-bold text-center">All articles</h1>
+      <div class="grid gap-12 md:gap-0 md:space-x-6 space-y-12 md:grid-cols-2">
+        <div class="article">
+          <img src="images/art1.png" alt="" />
+          <h2>
+            Granny gives everyone the finger, and other tips from OFFF Barcelona
+          </h2>
+        </div>
+        <div class="article">
+          <img src="images/art2.png" alt="" />
+          <h2>Hello World, or, in other words, why this blog exists</h2>
+        </div>
+        <div class="article">
+          <img src="images/art3.png" alt="" />
+          <h2>Hello World, or, in other words, why this blog exists</h2>
+        </div>
+        <div class="article">
+          <img src="images/art4.png" alt="" />
+          <h2>
+            Hello World, or, in other words, why this blog in other words, why
+            this blog exists
+          </h2>
+        </div>
+        <div class="article">
+          <img src="images/art5.png" alt="" />
+          <h2>Hello World, or, in other words, why this blog exists</h2>
+        </div>
+        <div class="article">
+          <img src="images/art6.png" alt="" />
+          <h2>
+            Hello World, or, in other words, why this blog in other words, why
+            this blog exists
+          </h2>
+        </div>
+      </div>
+    </article>
+
+    <footer
+      class="bg-black text-gray-100 w-full grid justify-center items-center py-8 gap-16"
+    >
+      <div
+        class="over flex overflow-x-hidden text-[20px] whitespace-nowrap gap-6 mb-4"
+      >
+        <p class="fade">CREATIVITY</p>
+        <p class="clear">DISTRIBUTED TEAMS</p>
+        <p class="fade">REMOTE WORK</p>
+        <p class="clear">UX DESIGN</p>
+        <p class="fade">DISTRIBUTED TEAMS</p>
+        <p class="clear">CREATIVITY</p>
+        <p class="fade">STRATEGY</p>
+        <p class="clear">DIGITAL PRODUCT DESIGN</p>
+        <p class="fade">SUSPENSE</p>
+        <p class="clear">GROWTH</p>
+      </div>
+
+      <div class="w-[65%] mx-auto grid gap-8 md:w-[45%] lg:w-[33%]">
+        <img
+          src="images/whitelogo.png"
+          class="px-4 md:w-[281px] lg:w-[291px] mx-auto"
+          alt=""
+        />
+        <p
+          class="text-center text-sm font-thin md:text-[15px] lg:text-[16px] md:font-normal"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu velit
+          tempus erat egestas efficitur. In hac habitasse platea dictumst. Fusce
+          a nunc eget ligula suscipit finibus.
+        </p>
+
+        <ul class="flex justify-around text-16px md:justify-center gap-8 mt-2">
+          <li class="border-b leading-tight cursor-pointer">Twitter</li>
+          <li class="border-b leading-tight cursor-pointer">LinkedIn</li>
+          <li class="border-b leading-tight cursor-pointer">RSS</li>
+        </ul>
+      </div>
+      <p
+        class="w-[50%] md:w-[20%] lg:w-[12%] m-auto text-center font-thin text-[13px] lg:text-[12px] leading-relaxed"
+      >
+        &copy; 2012-2025 Nordic Rose Co. All Rights reserved
+      </p>
+    </footer>
   </body>
-
-  <script type="module">
-    import { posts } from "/dummy.js";
-
-    if (!localStorage.getItem("hasVisited")) {
-      localStorage.setItem("posts", JSON.stringify(posts));
-
-      localStorage.setItem("hasVisited", "true");
-    }
-    const user = localStorage.getItem("isLoggedIn");
-    const logBtn = document.getElementById("login");
-    const regBtn = document.getElementById("register");
-    const menuIcon = document.getElementById("menuIcon");
-    const userName = document.getElementById("user");
-    const name = document.getElementById("name");
-    if (user) {
-      const currentUser = user.split("");
-      logBtn.style.display = "none";
-      regBtn.style.display = "none";
-      userName.style.display = "block";
-      userName.innerText = currentUser[0];
-      name.innerText = currentUser[0];
-    } else {
-      menuIcon.style.display = "none";
-      userName.style.display = "none";
-    }
-
-    function search() {
-      const searchForm = document.getElementById("searchForm").value.trim();
-      // const searchBtn = document.getElementById('searchBtn');
-      if (searchForm) {
-        location.href = "search.html?query=" + encodeURIComponent(searchForm);
-      } else {
-        alert("Input post to search");
-      }
-    }
-    window.search = search;
-
-    function hideNav() {
-      const closenav = document.getElementById("navContent");
-      closenav.style.display = "none";
-    }
-    window.hideNav = hideNav;
+  <script>
+    let div = document.getElementById("sidebar");
     function showNav() {
-      const closenav = document.getElementById("navContent");
-      closenav.style.display = "block";
+      div.classList.remove("-translate-x-full", "opacity-0");
+      div.classList.add("translate-x-0", "opacity-100");
     }
-    window.showNav = showNav;
+    function hideNav() {
+      div.classList.add("-translate-x-full", "opacity-0");
+      div.classList.remove("translate-x-0", "opacity-100");
+    }
 
-    // NAV LINKS MODIFICATION
-    let navLinks = document.querySelectorAll(".list-items");
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        navLinks.forEach((list) => list.classList.remove("active"));
-
-        link.classList.add("active");
-      });
-    });
-
-    // MAP POSTS TO HOME
-    let rightPosts = document.getElementById("right");
-    let leftPosts = document.getElementById("left");
-    let allPosts = JSON.parse(localStorage.getItem("posts"));
-    // localStorage.clear();
-    const filteredPosts = allPosts.filter((p) => p.image);
-    filteredPosts.forEach((p) => {
-      let link = document.createElement("a");
-      link.classList.add("post");
-      link.href = "post.html?id=" + p.id;
-      let texts = document.createElement("div");
-      texts.classList.add("postText");
-      let bgBlur = document.createElement("div");
-      bgBlur.classList.add("blurbg");
-      let category = document.createElement("p");
-      category.classList.add("category");
-      category.innerText = p.category;
-      let img = document.createElement("img");
-      img.src = p.image;
-      let title = document.createElement("p");
-      title.classList.add("title");
-      title.innerText = p.title;
-      let content = document.createElement("p");
-      content.className = "content";
-      content.innerText = p.content.slice(0, 150) + "...";
-
-      texts.appendChild(category);
-      texts.appendChild(title);
-      texts.appendChild(content);
-      link.appendChild(img);
-      link.appendChild(texts);
-      link.appendChild(bgBlur);
-      rightPosts.appendChild(link);
-    });
+    document.querySelectorAll("article").forEach((article) =>
+      addEventListener("click", () => {
+        location.href = "post.html";
+        arti;
+      })
+    );
   </script>
 </html>
